@@ -3,6 +3,7 @@ package net.quiltmc.users.malythist.randomdrops;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.command.CommandBuildContext;
 import net.minecraft.server.command.CommandManager;
@@ -29,6 +30,7 @@ public class RandomDropsMod implements ModInitializer {
 
 		registerCommands();
 		registerEvents();
+		registerServerLifecycle();
 	}
 
 	private void registerCommands() {
@@ -97,6 +99,13 @@ public class RandomDropsMod implements ModInitializer {
 				return true;
 			}
 			return DROP_MANAGER.onBlockBreak(serverWorld, pos, state, player);
+		});
+	}
+
+	private void registerServerLifecycle() {
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			LOGGER.info("[{}] resetting loot mappings for new world", MOD_ID);
+			DROP_MANAGER.resetWorldMappings();
 		});
 	}
 }

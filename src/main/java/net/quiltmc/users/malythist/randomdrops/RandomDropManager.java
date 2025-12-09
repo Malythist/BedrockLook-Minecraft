@@ -42,6 +42,11 @@ public class RandomDropManager {
 		RandomDropsMod.LOGGER.info("[{}] item pool size: {}", RandomDropsMod.MOD_ID, itemPool.size());
 	}
 
+	public void resetWorldMappings() {
+		blockMappings.clear();
+		usedItems.clear();
+	}
+
 	private boolean isAllowedItem(Item item) {
 		if (item instanceof SpawnEggItem) return false;
 
@@ -49,7 +54,6 @@ public class RandomDropManager {
 
 		Block block = Block.getBlockFromItem(item);
 		if (block != Blocks.AIR) {
-
 			if (block == Blocks.COMMAND_BLOCK
 				|| block == Blocks.CHAIN_COMMAND_BLOCK
 				|| block == Blocks.REPEATING_COMMAND_BLOCK) {
@@ -58,9 +62,9 @@ public class RandomDropManager {
 
 			if (block == Blocks.BARRIER
 				|| block == Blocks.STRUCTURE_BLOCK
+				|| block == Blocks.STRUCTURE_VOID
 				|| block == Blocks.BEDROCK
-				|| block == Blocks.JIGSAW
-				|| block == Blocks.STRUCTURE_VOID) {
+				|| block == Blocks.JIGSAW) {
 				return false;
 			}
 		}
@@ -68,12 +72,7 @@ public class RandomDropManager {
 		return true;
 	}
 
-	public boolean onBlockBreak(
-		ServerWorld world,
-		BlockPos pos,
-		BlockState state,
-		PlayerEntity player
-	) {
+	public boolean onBlockBreak(ServerWorld world, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!active) {
 			return true;
 		}
@@ -88,8 +87,11 @@ public class RandomDropManager {
 		}
 
 		Identifier blockId = Registries.BLOCK.getId(block);
+
 		LootMapping mapping = blockMappings.computeIfAbsent(blockId, id -> createRandomLoot());
+
 		world.breakBlock(pos, false, player);
+
 		dropCustomLoot(world, pos, mapping);
 
 		return false;
@@ -113,9 +115,12 @@ public class RandomDropManager {
 			initItemPool();
 		}
 
-		List<Item> available = itemPool.stream()
-			.filter(item -> !usedItems.contains(item))
-			.toList();
+		List<Item> available = new ArrayList<>();
+		for (Item item : itemPool) {
+			if (!usedItems.contains(item)) {
+				available.add(item);
+			}
+		}
 
 		if (available.isEmpty()) {
 			available = itemPool;
