@@ -48,7 +48,7 @@ public class RandomDropsMod implements ModInitializer {
 					.executes(ctx -> {
 						DROP_MANAGER.setActive(true);
 						ctx.getSource().sendFeedback(
-							() -> Text.literal("RandomDrops: включён"),
+							() -> Text.literal("RandomDrops: turned ON!"),
 							false
 						);
 						return 1;
@@ -57,7 +57,7 @@ public class RandomDropsMod implements ModInitializer {
 					.executes(ctx -> {
 						DROP_MANAGER.setActive(false);
 						ctx.getSource().sendFeedback(
-							() -> Text.literal("RandomDrops: выключен"),
+							() -> Text.literal("RandomDrops: turned OFF!"),
 							false
 						);
 						return 1;
@@ -69,7 +69,7 @@ public class RandomDropsMod implements ModInitializer {
 								int value = IntegerArgumentType.getInteger(ctx, "value");
 								DROP_MANAGER.setMinCount(value);
 								ctx.getSource().sendFeedback(
-									() -> Text.literal("Min обновлён: " + DROP_MANAGER.getMinCount()),
+									() -> Text.literal("Min updated: " + DROP_MANAGER.getMinCount()),
 									false
 								);
 								return 1;
@@ -80,7 +80,7 @@ public class RandomDropsMod implements ModInitializer {
 								int value = IntegerArgumentType.getInteger(ctx, "value");
 								DROP_MANAGER.setMaxCount(value);
 								ctx.getSource().sendFeedback(
-									() -> Text.literal("Max обновлён: " + DROP_MANAGER.getMaxCount()),
+									() -> Text.literal("Max updated: " + DROP_MANAGER.getMaxCount()),
 									false
 								);
 								return 1;
@@ -98,11 +98,11 @@ public class RandomDropsMod implements ModInitializer {
 
 						ctx.getSource().sendFeedback(
 							() -> Text.literal(
-								"RandomDrops информация:\n" +
-									"Состояние: " + (active ? "ВКЛ" : "ВЫКЛ") + "\n" +
-									"Диапазон: " + min + "–" + max + "\n" +
-									"Блоков с назначенным лутом: " + mapped + "\n" +
-									"Использовано предметов: " + used + " / " + total
+								"RandomDrops info:\n" +
+									"State: " + (active ? "ON" : "OFF") + "\n" +
+									"Range: " + min + "–" + max + "\n" +
+									"Blocks known: " + mapped + "\n" +
+									"Blocks used: " + used + " / " + total
 							),
 							false
 						);
@@ -113,7 +113,7 @@ public class RandomDropsMod implements ModInitializer {
 					.executes(ctx -> {
 						DROP_MANAGER.resetWorldMappings();
 						ctx.getSource().sendFeedback(
-							() -> Text.literal("RandomDrops: таблицы дропа очищены для этого мира"),
+							() -> Text.literal("RandomDrops: loot table has been cleared"),
 							false
 						);
 						return 1;
