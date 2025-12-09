@@ -159,6 +159,22 @@ public class RandomDropManager {
 		return maxCount;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public int getMappingsCount() {
+		return blockMappings.size();
+	}
+
+	public int getUsedItemsCount() {
+		return usedItems.size();
+	}
+
+	public int getItemPoolSize() {
+		return itemPool.size();
+	}
+
 	private static class LootMapping {
 		final Item item;
 		final int count;

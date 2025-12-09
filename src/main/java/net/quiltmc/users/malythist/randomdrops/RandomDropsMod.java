@@ -48,7 +48,7 @@ public class RandomDropsMod implements ModInitializer {
 					.executes(ctx -> {
 						DROP_MANAGER.setActive(true);
 						ctx.getSource().sendFeedback(
-							() -> Text.literal("RandomDrops: случайный дроп включен"),
+							() -> Text.literal("RandomDrops: включён"),
 							false
 						);
 						return 1;
@@ -57,7 +57,7 @@ public class RandomDropsMod implements ModInitializer {
 					.executes(ctx -> {
 						DROP_MANAGER.setActive(false);
 						ctx.getSource().sendFeedback(
-							() -> Text.literal("RandomDrops: случайный дроп выключен"),
+							() -> Text.literal("RandomDrops: выключен"),
 							false
 						);
 						return 1;
@@ -68,10 +68,8 @@ public class RandomDropsMod implements ModInitializer {
 							.executes(ctx -> {
 								int value = IntegerArgumentType.getInteger(ctx, "value");
 								DROP_MANAGER.setMinCount(value);
-								int min = DROP_MANAGER.getMinCount();
-								int max = DROP_MANAGER.getMaxCount();
 								ctx.getSource().sendFeedback(
-									() -> Text.literal("RandomDrops: min=" + min + ", max=" + max),
+									() -> Text.literal("Min обновлён: " + DROP_MANAGER.getMinCount()),
 									false
 								);
 								return 1;
@@ -81,14 +79,45 @@ public class RandomDropsMod implements ModInitializer {
 							.executes(ctx -> {
 								int value = IntegerArgumentType.getInteger(ctx, "value");
 								DROP_MANAGER.setMaxCount(value);
-								int min = DROP_MANAGER.getMinCount();
-								int max = DROP_MANAGER.getMaxCount();
 								ctx.getSource().sendFeedback(
-									() -> Text.literal("RandomDrops: min=" + min + ", max=" + max),
+									() -> Text.literal("Max обновлён: " + DROP_MANAGER.getMaxCount()),
 									false
 								);
 								return 1;
 							})))
+				)
+
+				.then(CommandManager.literal("info")
+					.executes(ctx -> {
+						boolean active = DROP_MANAGER.isActive();
+						int min = DROP_MANAGER.getMinCount();
+						int max = DROP_MANAGER.getMaxCount();
+						int mapped = DROP_MANAGER.getMappingsCount();
+						int used = DROP_MANAGER.getUsedItemsCount();
+						int total = DROP_MANAGER.getItemPoolSize();
+
+						ctx.getSource().sendFeedback(
+							() -> Text.literal(
+								"RandomDrops информация:\n" +
+									"Состояние: " + (active ? "ВКЛ" : "ВЫКЛ") + "\n" +
+									"Диапазон: " + min + "–" + max + "\n" +
+									"Блоков с назначенным лутом: " + mapped + "\n" +
+									"Использовано предметов: " + used + " / " + total
+							),
+							false
+						);
+						return 1;
+					})
+				)
+				.then(CommandManager.literal("reset")
+					.executes(ctx -> {
+						DROP_MANAGER.resetWorldMappings();
+						ctx.getSource().sendFeedback(
+							() -> Text.literal("RandomDrops: таблицы дропа очищены для этого мира"),
+							false
+						);
+						return 1;
+					})
 				)
 		);
 	}
