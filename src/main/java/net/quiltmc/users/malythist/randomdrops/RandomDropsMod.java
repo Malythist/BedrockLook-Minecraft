@@ -136,5 +136,9 @@ public class RandomDropsMod implements ModInitializer {
 			LOGGER.info("[{}] resetting loot mappings for new world", MOD_ID);
 			DROP_MANAGER.resetWorldMappings();
 		});
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+			LOGGER.info("[{}] disabling random drops for stopped world", MOD_ID);
+			DROP_MANAGER.setActive(false);
+		});
 	}
 }
