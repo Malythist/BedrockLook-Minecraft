@@ -1,6 +1,4 @@
-## This mod makes all drops from breakable blocks random and multiplied. Inspired by Dream's video series!
-
-[Modrinth Link](https://modrinth.com/mod/random-dropz)
+## This mod turnes every block you look on into bedrock... This is so cursed! Good luck playing the game with this mod, I failed!
 
 ### Installation:
 
