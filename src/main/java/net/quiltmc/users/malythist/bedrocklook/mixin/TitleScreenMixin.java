@@ -1,6 +1,6 @@
-package net.quiltmc.users.malythist.randomdrops.mixin;
+package net.quiltmc.users.malythist.bedrocklook.mixin;
 
-import net.quiltmc.users.malythist.randomdrops.RandomDropsMod;
+import net.quiltmc.users.malythist.bedrocklook.BedrockLookMod;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class TitleScreenMixin {
     @Inject(method = "init", at = @At("TAIL"))
     public void onInit(CallbackInfo ci) {
-        RandomDropsMod.LOGGER.info("This line is printed by an example mod mixin!");
+		BedrockLookMod.LOGGER.info("This line is printed by an example mod mixin!");
     }
 }

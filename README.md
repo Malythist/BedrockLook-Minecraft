@@ -14,6 +14,6 @@ The mod is turned off by default so that you can play other worlds without chang
 
 The initial range of values for the number of drops is from 1 to 100. You can change min and max values by using commands `/randomdrops set min <your_amount>` and `/randomdrops set max <your_amount>`
 
-Use command `/randomdrops info` to see actual information about mod usage in your world
+Use command `/bedrocklook info` to see actual information about mod usage in your world
   
-Use command `/randomdrops reset` to clear drops for your world, than loot-table will start from scratch
+Use command `/bedrocklook reset` to clear drops for your world, than loot-table will start from scratch

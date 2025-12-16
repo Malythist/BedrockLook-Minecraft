@@ -2,10 +2,10 @@
     "schema_version": 1,
     "quilt_loader": {
         "group": "${group}",
-        "id": "randomdrops",
+        "id": "bedrocklook",
         "version": "${version}",
         "metadata": {
-            "name": "RandomDrops",
+            "name": "BedrockLook",
             "description": "Drops now random and multiplyed!",
             "contributors": {
                 "Malythist": "Owner"
@@ -15,7 +15,7 @@
         },
         "intermediate_mappings": "net.fabricmc:intermediary",
         "entrypoints": {
-            "init": "net.quiltmc.users.malythist.randomdrops.RandomDropsMod"
+            "init": "net.quiltmc.users.malythist.bedrocklook.BedrockLookMod"
         },
         "depends": [
             {
@@ -32,5 +32,5 @@
             }
         ]
     },
-    "mixin": "randomdrops.mixins.json"
+    "mixin": "bedrocklook.mixins.json"
 }
