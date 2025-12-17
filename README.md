@@ -1,4 +1,4 @@
-## This mod turnes every block you look on into bedrock... This is so cursed! Good luck playing the game with this mod, I failed!
+## This mod turnes every block you look on into bedrock... This is so cursed! Good luck beating the game with this mod, I failed!
 
 ### Installation:
 
